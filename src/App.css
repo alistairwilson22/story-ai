@@ -20,8 +20,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(12px + 2vmin);
   color: white;
+}
+
+.App-header .container {
+  background: rgba(0,0,0,0.2);
+  width: 80%;
+  height: 80%;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
 }
 
 .App-link {
@@ -35,4 +43,48 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.story {
+  padding: 20px;
+}
+.bg1 {
+  background-image: url('./img/349649.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.bg2 {
+  background-image: url('./img/349651.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.bg3 {
+  background-image: url('./img/349663.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.bg4 {
+  background-image: url('./img/851217.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.name-prompts button, .title-prompts button {
+  margin: 5px; 
+  height: 120px; 
+  width: 120px; 
+  text-transform: capitalize;
+}
+.name-prompts, .title-prompts {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  padding:10px;
+  margin-top:15px;
+}
+.storySubmit {
+  padding:10px;
+  margin: 20px;
 }
