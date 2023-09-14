@@ -2,22 +2,18 @@ import './App.css';
 import {useState} from 'react';
 import {names, titles, animals} from './data/data';
 
+const fourRandomNames = names.sort(() => Math.random() - 0.5).slice(0, 4);
+const fourRandomTitles = titles.sort(() => Math.random() - 0.5).slice(0,4);
+const fourRandomAnimals = animals.sort(() => Math.random() - 0.5).slice(0,4);
+const namedAnimals = fourRandomNames.map((name, index) => `${name} the ${fourRandomAnimals[index]}`);
+
+
 function App() {
-  const getStoryAPI = 'https://api.openai.com/v1/chat/completions';
-  const getImageAPI = 'https://api.openai.com/v1/images/generations';
-  const apiHeaders = {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}` 
-  }
   const [story, setStory] = useState("");
   const [characters, setCharacters] = useState("Norah, Jessica and Caleb");
   const [plot, setPlot] = useState("discover something on a beach");
   const [latestPlot, setLatestPlot] = useState("");
   const [storyImage, setStoryImage] = useState("");
-  const fourRandomNames = names.sort(() => Math.random() - 0.5).slice(0, 4);
-  const fourRandomTitles = titles.sort(() => Math.random() - 0.5).slice(0,4);
-  const fourRandomAnimals = animals.sort(() => Math.random() - 0.5).slice(0,4);
-  const namedAnimals = fourRandomNames.map((name, index) => `${name} the ${fourRandomAnimals[index]}`);
 
   const changeCharacters = (event) => {
     setCharacters(event.target.value)
@@ -31,11 +27,17 @@ function App() {
     setLatestPlot(event.target.value)
   }
 
+  const getStoryAPI = 'https://api.openai.com/v1/chat/completions';
+  const getImageAPI = 'https://api.openai.com/v1/images/generations';
+  const apiHeaders = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}` 
+  }
+
   const openAIStoryRequest = () => {
 
-    let storyApiContent = "";
-
     let plotAddition = latestPlot ? `, in the next story section include ${latestPlot}` : null 
+    let storyApiContent = "";
 
     story ? 
     storyApiContent = `Please provide around 500 words for the following story and end on a cliff hanger ${plotAddition}: ${story}`:
@@ -61,7 +63,6 @@ function App() {
     .then((response) => {
       if (!response.ok) {
         throw new Error(`There was an error with the Story API`);
-        console.error(response)
       }
 
       return response.json();
@@ -90,7 +91,6 @@ function App() {
       .then((response) => {
         if (!response.ok) {
           throw new Error(`There was an error with the Image API`);
-          console.error(response)
         }
         return response.json();
       })
@@ -124,7 +124,6 @@ function App() {
     .then((response) => {
       if(!response.ok) {
         throw new Error( "There was an error concluding the story");
-        console.error(response);
       }
       return response.json();
     })
@@ -142,7 +141,7 @@ function App() {
           <h1>Would you like me to tell you a story?</h1>
           <p>Who should be in the story?</p>
           <div className="name-prompts">{
-            namedAnimals.map(name => { return <button key={name} value={name} onClick={changeCharacters}>{name}</button>})
+            namedAnimals.map((name, index) => { return <button className={`button-${index}`} key={name} value={name} onClick={changeCharacters}>{name}</button>})
           }</div>
           <input
           className='characters'
@@ -152,7 +151,7 @@ function App() {
           />
           <p>What should the story be about?</p>
           <div className="title-prompts">{
-            fourRandomTitles.map(title => { return <button key={title} value={title} onClick={changePlot}>{title}</button>})
+            fourRandomTitles.map((title, index) => { return <button className={`button-${index}`} key={title} value={title} onClick={changePlot}>{title}</button>})
           }</div>
           <input
           className='plot'
@@ -161,15 +160,17 @@ function App() {
           onChange={changePlot}
           />
           <div>
-          <button className="storySubmit storyStart" onClick={openAIStoryRequest}>Tell me a story</button>
+          <button className="storySubmit storyStart" onClick={openAIStoryRequest} href="#scroll">Tell me a story</button>
+          <span id="scroll"></span>
           </div>
-          {
-            storyImage ? <img src={storyImage} /> : null
-          }
-          <p className="story">{story}</p>
           { 
           story ?
           <div>
+            <h2 className="story-title">{characters}: {plot}</h2>
+            {
+            storyImage ? <img src={storyImage} /> : null
+            }
+            <p className="story">{story}</p>
             <input
             className='what-next'
             type='text'

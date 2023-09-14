@@ -46,7 +46,7 @@
 }
 
 .story {
-  padding: 20px;
+  padding: 20px 50px;
 }
 .bg1 {
   background-image: url('./img/349649.jpg');
@@ -69,22 +69,51 @@
   background-size: cover;
 }
 
+button {
+  box-shadow: 5px 5px rgba(0,0,0,0.5);
+  border-radius: 20px;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+}
 .name-prompts button, .title-prompts button {
-  margin: 5px; 
+  margin: 10px; 
   height: 120px; 
   width: 120px; 
   text-transform: capitalize;
+
 }
 .name-prompts, .title-prompts {
   display: flex;
   justify-content: center;
 }
-
+.button-0 {
+  background-color: #A3DBCE;
+}
+.button-1 {
+  background-color: #7AACB8;
+}
+.button-2 {
+  background-color: #B5644F;
+}
+.button-3 {
+  background-color: #E68E2C;
+}
 input {
   padding:10px;
   margin-top:15px;
+  text-align: center;
 }
 .storySubmit {
-  padding:10px;
+  padding: 15px;
   margin: 20px;
+  background-color: #819A8E;
+}
+.storyContinue {
+  background-color: #CEDDBF;
+}
+.storyConclude {
+  margin-top:0px;
+  background-color: #DDAB75;
 }
