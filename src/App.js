@@ -40,8 +40,8 @@ function App() {
     let storyApiContent = "";
 
     story ? 
-    storyApiContent = `Please provide around 500 words for the following story and end on a cliff hanger ${plotAddition}: ${story}`:
-    storyApiContent = `Please provide around 500 word for the start of a children's story and end on a cliff hanger. The story should have characters ${characters}. The plot should include ${plot}.`
+    storyApiContent = `Please provide around 100 words for the following story and end on a cliff hanger ${plotAddition}: ${story}`:
+    storyApiContent = `Please provide around 100 word for the start of a children's story and end on a cliff hanger. The story should have characters ${characters}. The plot should include ${plot}.`
 
     setStory("Making your new story...");
 
@@ -75,6 +75,9 @@ function App() {
     .catch((error) => {
       console.error('Error:', error)
     });
+
+    setLatestPlot(null)
+
 
     const imageApiBody = {
       "prompt": `${characters}: ${plot}`,
